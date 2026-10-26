@@ -1,23 +1,17 @@
-name: My First Pipeline
+name: DevSecOps Pipeline
 
 on: [push]
 
 jobs:
-  build-and-test:
+  security-checks:
     runs-on: ubuntu-latest
     steps:
-      - name: Скачиваем код
+      - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Устанавливаем Python
-        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          fetch-depth: 0
 
-      - name: Запускаем скрипт
-        run: python hello.py
-
-      - name: Проверка на секреты (Gitleaks)
+      - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
-        with:
-          args: detect --source . --verbose
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
