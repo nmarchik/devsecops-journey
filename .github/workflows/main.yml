@@ -16,3 +16,6 @@ jobs:
 
       - name: Запускаем скрипт
         run: python hello.py
+
+      - name: Проверка на секреты (Gitleaks)
+	uses: gitleaks/gitleaks-action@v2
