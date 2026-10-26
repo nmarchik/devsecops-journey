@@ -19,3 +19,5 @@ jobs:
 
       - name: Проверка на секреты (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
+        with:
+          args: detect --source . --verbose
