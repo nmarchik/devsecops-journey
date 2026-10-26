@@ -3,18 +3,21 @@ name: DevSecOps Pipeline
 on: [push]
 
 jobs:
-  security-check:
+  build-and-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: TruffleHog Secret Scan
-        uses: trufflesecurity/trufflehog@main
+      - name: Build Docker image
+        run: docker build -t my-first-image:latest .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
         with:
-          path: ./
-          base: ""
-          head: HEAD
-          extra_args: --only-verified
+          image-ref: 'my-first-image:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
