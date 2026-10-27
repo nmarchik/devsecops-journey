@@ -44,3 +44,6 @@ jobs:
           format: 'table'
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
+
+      - name: Test Secret (Safe)
+        run: echo "The secret is ${{ secrets.MY_SECRET_PASSWORD }}"
