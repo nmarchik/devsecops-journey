@@ -12,8 +12,12 @@ spec:
       labels:
         app: my-app
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
       - name: my-app
         image: my-first-image:latest
         securityContext:
-          privileged: true # ОПАСНО: дает контейнеру права root на хосте
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
