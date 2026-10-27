@@ -34,3 +34,13 @@ jobs:
         run: |
           pip install semgrep
           semgrep --config p/python --config p/owasp-top-ten --error --exclude-rule yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag .
+
+
+      - name: Check Kubernetes Security (Trivy K8s)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: 'k8s/'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
