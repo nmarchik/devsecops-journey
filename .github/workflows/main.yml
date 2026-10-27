@@ -31,6 +31,6 @@ jobs:
           soft_fail: false
 
       - name: Run Semgrep (SAST)
-        uses: returntocorp/semgrep-action@v1
-        with:
-          config: p/ci
+        run: |
+          pip install semgrep
+          semgrep --config p/python --config p/owasp-top-ten --error .
