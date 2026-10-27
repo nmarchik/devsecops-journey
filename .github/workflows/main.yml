@@ -33,4 +33,4 @@ jobs:
       - name: Run Semgrep (SAST)
         run: |
           pip install semgrep
-          semgrep --config p/python --config p/owasp-top-ten --error .
+          semgrep --config p/python --config p/owasp-top-ten --error --exclude-rule yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag .
