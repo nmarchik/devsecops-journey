@@ -47,3 +47,25 @@ jobs:
 
       - name: Test Secret (Safe)
         run: echo "The secret is ${{ secrets.MY_SECRET_PASSWORD }}"
+
+      - name: Start HashiCorp Vault (Dev Mode)
+        run: |
+          docker run -d --name vault -p 8200:8200 -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' hashicorp/vault
+          sleep 5
+
+      - name: Write and Read Secret from Vault
+        run: |
+          # Устанавливаем переменные для подключения к Vault
+          export VAULT_ADDR='http://127.0.0.1:8200'
+          export VAULT_TOKEN='myroot'
+          
+          # Скачиваем клиент Vault (CLI)
+          wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+          sudo apt update && sudo apt install vault
+          
+          # Записываем секрет в Vault
+          vault kv put secret/my-app db_password="SuperSecretVaultPassword!"
+          
+          # Читаем секрет обратно
+          vault kv get secret/my-app
