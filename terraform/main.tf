@@ -11,6 +11,3 @@ resource "local_file" "my_server_config" {
   content  = "server_ip: 192.168.1.1"
   filename = "server_info.txt"
 }
-resource "aws_s3_bucket" "my_public_bucket" {
-  bucket = "my-super-public-bucket"
-}
