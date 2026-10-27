@@ -29,3 +29,8 @@ jobs:
           framework: terraform
           output_format: cli
           soft_fail: false
+
+      - name: Run Semgrep (SAST)
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: p/ci
