@@ -13,5 +13,4 @@ resource "local_file" "my_server_config" {
 }
 resource "aws_s3_bucket" "my_public_bucket" {
   bucket = "my-super-public-bucket"
-  acl    = "public-read"
 }
