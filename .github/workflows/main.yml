@@ -69,3 +69,8 @@ jobs:
           
           # Читаем секрет обратно
           vault kv get secret/my-app
+
+      - name: Health Check (Ping Prometheus)
+        run: |
+          echo "Checking if the monitoring service is alive..."
+          curl -s -o /dev/null -w "%{http_code}" https://prometheus.io | grep "200" && echo "Prometheus is UP!" || (echo "Prometheus is DOWN!" && exit 1)
