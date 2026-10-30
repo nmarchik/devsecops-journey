@@ -17,6 +17,7 @@
 - **Управление секретами:**
   - Использование встроенных **GitHub Secrets** для безопасной передачи данных в пайплайн.
   - Интеграция с **HashiCorp Vault** (эмуляция): запуск Vault в Docker, запись и чтение секретов через CLI.
+- **Monitoring & Alerting:** Настроен стек Prometheus + Grafana (через Docker Compose). Реализованы алерты в Telegram (через Bot API) при падении сервисов.
 
 ## ⚙️ Стек технологий:
 `GitHub Actions` · `Docker` · `Terraform` · `Kubernetes` · `Trivy` · `Checkov` · `Semgrep` · `HashiCorp Vault` · `Linux/MacOS Terminal` · `Git`
