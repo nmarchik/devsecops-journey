@@ -16,6 +16,8 @@ spec:
       - name: my-app
         image: my-first-image:latest
         imagePullPolicy: Never
+        securityContext:                # <--- ДОБАВИТЬ ЭТИ 2 СТРОКИ
+          allowPrivilegeEscalation: false # <--- 
         ports:
         - containerPort: 8080
 ---
