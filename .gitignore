@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# macOS
+.DS_Store
