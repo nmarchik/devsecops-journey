@@ -12,12 +12,16 @@ spec:
       labels:
         app: my-app
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
       - name: my-app
         image: my-first-image:latest
         imagePullPolicy: Never
-        securityContext:                # <--- ДОБАВИТЬ ЭТИ 2 СТРОКИ
-          allowPrivilegeEscalation: false # <--- 
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
         ports:
         - containerPort: 8080
 ---
