@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker image
-        run: docker build -t my-first-image:latest .
+        run: docker build -t my-first-image:latest ./app
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
